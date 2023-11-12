@@ -15,23 +15,8 @@ async def products_man(item: JSONData):
     info = {"GrossProfitability": GrossProfitability}
     return JSONResponse(content=jsonable_encoder(info))
 
-@app.get("/GrossProfitability")
-async def get_profitability(GrossProfit, RealizationProduct):
-    GrossProfitability = float(GrossProfit) / float(RealizationProduct)
-    percent_value = GrossProfitability * 100;
-    result = str(percent_value) + ' %'
-    return {"Валовая рентабельность продукции = ": result}
+@app.get("/ExtraCharge")
+async def get_extracharge(CostPrice, percent):
+    extracharge = (double(CostPrice)/100-double(percent)) * 100;
+    return {"Итоговая цена товара = ": str(extracharge)}
 
-@app.get("/Revenue_forecast_by_the_end_of_the_month")
-async def get_revenue_forecast_by_the_end_of_the_month(Fact_revenue, Lasts_days, Remains_days):
-    FORECAST = int(Fact_revenue)/(int(Lasts_days)*int(Remains_days))
-    return {"Прогноз выручки до конца месяца = ": str(FORECAST)}
-
-@app.get("/The_forecast_of_the_implementation_of_the_plan_as_a_percentage")
-async def get_forecast_of_the_implementation_of_the_plan_as_a_percentage(FORECAST, Plan_revenue):
-    PERCENTAGE_FORECAST = (int(FORECAST)*100)/int(Plan_revenue)
-    return {"Выполнение плана на % (прогноз) = ": str(PERCENTAGE_FORECAST) + ' %'}
-
-@app.get("/Hello/")
-async def root():
-    return {"message": "Hello World"}
