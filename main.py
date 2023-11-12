@@ -16,7 +16,7 @@ async def products_man(item: JSONData):
     return JSONResponse(content=jsonable_encoder(info))
 
 @app.get("/ExtraCharge")
-async def get_extracharge(CostPrice, percent):
-    extracharge = (double(CostPrice)/100-double(percent)) * 100;
+async def get_extracharge(CostPrice, Percent):
+    extracharge = (double(CostPrice)/100-double(Percent)) * 100;
     return {"Итоговая цена товара = ": str(extracharge)}
 
